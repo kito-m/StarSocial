@@ -1,0 +1,15 @@
+ {% externds 'posts/post_base.html' %}
+
+{% block post_content %}
+
+<div class="posts">
+    {% include "posts/_posts.html" with post=object hide_delete=True %}
+</div>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Confirm Delete" class="btn btn-danger btn-lg">
+    <a href="{% url 'post:single' username=user.username pk=object.pk %}" class="btn btn-simple btn-lg btn-default"></a>
+</form>
+
+{% endblock %}

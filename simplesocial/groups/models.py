@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.base import Model
+from django.db.models.deletion import CASCADE
 from django.utils.text import slugify
 from django.urls import reverse
 
@@ -37,8 +38,8 @@ class Group(Model):
         ordering = ['name']
 
 class GroupMember(Model):
-    group = models.ForeignKey(Group, related_name='membership')
-    user = models.ForeignKey(User, related_name='user_groups')
+    group = models.ForeignKey(Group, related_name='membership', on_delete=CASCADE)
+    user = models.ForeignKey(User, related_name='user_groups', on_delete=CASCADE)
 
     def __str__(self):
         return self.user.username
